@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Calculator</title>
+	<link rel="stylesheet" type="text/css" href="calculator.css">
+</head>
+<style type="text/css">
+.calculator {
+    padding: 10px;
+    border-radius: 1em;
+    height: 380px;
+    width: 400px;
+    margin: auto;
+    background-color: #191b28;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+.display-box {
+    font-family: 'Orbitron', sans-serif;
+    background-color: #dcdbe1;
+    border: solid black 0.5px;
+    color: black;
+    border-radius: 5px;
+    width: 98%;
+    height: 65%;
+}
+#btn {
+    background-color: #e5e5e5;
+}
+input[type=button] {
+    font-family: 'Orbitron', sans-serif;
+    background: linear-gradient(#136a8a,#267871) ;
+    color: white;
+    border: solid black 0.5px;
+    width: 100%;
+    border-radius: 5px;
+    height: 70%;
+    outline: none;
+}
+input:active[type=button] {
+    background: #e5e5e5;
+    box-shadow: inset 0px 0px 5px #c1c1c1;
+}
+</style>
+<body>
+	<table class="calculator" >
+	  <tr>
+	    <td colspan="3"> <input class="display-box" type="text" id="result" /> </td>
+	    <td> <input type="button" value="C" onclick="clearScreen()" id="btn" /> </td>
+	  </tr>
+	  <tr>
+	    <td> <input id="one" type="button" value="1" onclick="addDigit('1')" /> </td>
+	    <td> <input id="two" type="button" value="2" onclick="addDigit('2')" /> </td>
+	    <td> <input id="three" type="button" value="3" onclick="addDigit('3')" /> </td>
+	    <td> <input id="divide" type="button" value="/" onclick="getOperator('/')" /> </td>
+	  </tr>
+	  <tr>
+	    <td> <input id="four" type="button" value="4" onclick="addDigit('4')" /> </td>
+	    <td> <input id="five" type="button" value="5" onclick="addDigit('5')" /> </td>
+	    <td> <input id="six" type="button" value="6" onclick="addDigit('6')" /> </td>
+	    <td> <input id="subtract" type="button" value="-" onclick="getOperator('-')" /> </td>
+	  </tr>
+	  <tr>
+	    <td> <input id="seven" type="button" value="7" onclick="addDigit('7')" /> </td>
+	    <td> <input id="eight" type="button" value="8" onclick="addDigit('8')" /> </td>
+	    <td> <input id="nine" type="button" value="9" onclick="addDigit('9')" /> </td>
+	    <td> <input id="add" type="button" value="+" onclick="getOperator('+')" /> </td>
+	  </tr>
+	  <tr>
+	    <td> <input id="decimal" type="button" value="." onclick="decimal()" /> </td>
+	    <td> <input id="zero" type="button" value="0" onclick="addDigit('0')" /> </td>
+	    <td> <input id="equal" type="button" value="=" onclick="calculateResult()" id="btn" /> </td>
+	    <td> <input id="multiply" type="button" value="*" onclick="getOperator('*')" /> </td>
+	  </tr>
+	</table>
+
+<script type="text/javascript">
+
+	let firstNum,secondNum,operator;
+
+	function addDigit(digit) {
+		let existingValue = document.querySelector("#result").value;
+		document.querySelector("#result").value=existingValue + digit;
+	}
+
+	function getOperator(op){
+		//Store the first number
+		firstNum = document.querySelector("#result").value;
+		//Clear the screen
+		document.querySelector("#result").value = " ";
+		//Store the operator sign
+		operator = op;
+	}
+
+	function clearScreen() {
+		document.querySelector("#result").value=" ";
+	}
+
+	function calculateResult(){
+		secondNum = document.querySelector("#result").value;
+		if (operator === "+"){
+			document.querySelector("#result").value=(Number(firstNum) + Number(secondNum));
+		}else if(operator === "-"){
+			document.querySelector("#result").value=(Number(firstNum) - Number(secondNum));
+		}else if(operator === "*"){
+			document.querySelector("#result").value=(Number(firstNum) * Number(secondNum));
+		}else{
+			document.querySelector("#result").value=(Number(firstNum) / Number(secondNum));
+
+		}
+
+
+	}
+
+</script>
+</body>
+</html>
